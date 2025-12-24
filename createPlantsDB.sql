@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS profile (
+id_profile BIGSERIAL PRIMARY KEY,
+login VARCHAR(255) NOT NULL UNIQUE,
+password_hash VARCHAR(255) NOT NULL,
+salt VARCHAR(255));
+
+CREATE TABLE IF NOT EXISTS rare_plants(
+id Serial PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+rarity_score INT NOT NULL,
+id_profile BIGINT,
+FOREIGN KEY (id_profile) REFERENCES profile(id_profile)
+ON DELETE SET NULL);

@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Lena
+      POSTGRES_DB: plants
+    volumes:
+      - data:/var/lib/postgresql/data
+      - ./createPlantsDB.sql:/docker-entrypoint-initdb.d/createPlantsDB.sql
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  data:
