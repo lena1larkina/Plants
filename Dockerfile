@@ -1,11 +1,10 @@
 FROM maven:3.9.2-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Копируем зависимости и код
+
 COPY pom.xml .
 COPY src ./src
 
-# Сборка WAR
 RUN mvn clean package
 
 FROM tomcat:11.0.4-jdk17
